@@ -1,2 +1,4 @@
 # my-UserScript-for-Utility
-Webサイト生活を豊かにするためのUserScript
+Internet生活を豊かにするためのUserScript
+- 作者はド素人なのでいちいちコメントを書いたりするので、
+  - コードリーディングには向いてません
