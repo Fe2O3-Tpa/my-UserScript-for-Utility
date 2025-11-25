@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         勉強のためのUserscript
-// @version      1.0
+// @version      1.0.1
 // @description  深夜の動画視聴・サイト閲覧を禁止。YouTubeShortsとXも禁止。
 // @match        https://*/*
 // @match        http://*/*
@@ -41,11 +41,9 @@ addEventListener("urlChange", () => {
     doAll();
 })
 
-const YT_SHORT_RE = /.*youtube.*\/shorts\/.*/
-
 const redirectTo = () => {
     let date = new Date();
-    const isShort = YT_SHORT_RE.test(lastUrl);
+    const isShort = lastUrl.includes("/shorts/") && lastUrl.includes("youtube");
     if (isShort) {
         return "https://www.youtube.com/watch?v=wBf47hGMch0";
     }
