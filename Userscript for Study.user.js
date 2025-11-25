@@ -28,11 +28,17 @@ observer.observe(document, {subtree: true, childList: true});
 // 1. documentの変化を監視
 // 2. 変化があるとMutationObserverのコールバックを実行(urlChangeを発火)
 
-addEventListener("urlChange", () => {
+const doAll = () => {
     const redirectTarget = redirectTo();
-    if (redirectTarget === lastUrl) {
+    if (redirectTarget !== lastUrl) {
         location.replace(redirectTarget);
     }
+}
+
+// 初回実行
+doAll()
+addEventListener("urlChange", () => {
+    doAll();
 })
 
 const YT_SHORT_RE = /.*youtube.*\/shorts\/.*/
@@ -44,7 +50,7 @@ const redirectTo = () => {
         return "https://www.youtube.com/watch?v=wBf47hGMch0";
     }
     if (lastUrl.includes("x.com")) {
-        return "https://www.google.com"
+        return "https://www.google.com";
     }
     if (date.getHours()>=23 | date.getHours() <= 5) {
         if (!lastUrl.includes("youtube.com")) {
