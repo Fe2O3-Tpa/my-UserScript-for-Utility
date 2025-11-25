@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         勉強のためのUserscript
-// @version      1.0.1
+// @version      1.0.2
 // @description  深夜の動画視聴・サイト閲覧を禁止。YouTubeShortsとXも禁止。
 // @match        https://*/*
 // @match        http://*/*
@@ -16,6 +16,15 @@
 // 深夜であった場合、問答無用でYouTubeのホームまたはGoogleのホームに移動。
 // Xであった場合Googleのホームに移動。
 
+// 初回実行
+doAll()
+
+// イベントの処理
+addEventListener("urlChange", () => {
+    doAll();
+})
+
+// --Observer--
 let lastUrl = location.href;
 const observer = new MutationObserver(() => {
     if (lastUrl !== location.href) {
@@ -24,24 +33,20 @@ const observer = new MutationObserver(() => {
     }
 });
 
-observer.observe(document, {subtree: true, childList: true});
+observer.observe(document, { subtree: true, childList: true });
 // 1. documentの変化を監視
 // 2. 変化があるとMutationObserverのコールバックを実行(urlChangeを発火)
 
 const doAll = () => {
+    // 1回のリダイレクトをすべてする
     const redirectTarget = redirectTo();
     if (redirectTarget !== lastUrl) {
         location.replace(redirectTarget);
     }
 }
 
-// 初回実行
-doAll()
-addEventListener("urlChange", () => {
-    doAll();
-})
-
-const redirectTo = () => {
+function redirectTo() {
+    // リダイレクト先を選ぶ
     let date = new Date();
     const isShort = lastUrl.includes("/shorts/") && lastUrl.includes("youtube");
     if (isShort) {
@@ -50,7 +55,7 @@ const redirectTo = () => {
     if (lastUrl.includes("x.com")) {
         return "https://www.google.com";
     }
-    if (date.getHours()>=23 | date.getHours() <= 5) {
+    if (date.getHours() >= 23 | date.getHours() <= 5) {
         if (!lastUrl.includes("youtube.com")) {
             return "https://www.google.com";
         } else {
