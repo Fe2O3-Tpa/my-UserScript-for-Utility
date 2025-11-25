@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         YouTubeショート動画を禁止
-// @version      1.2.1
+// @version      1.2.2
 // @description  YouTubeのショート動画を禁止する。
 // @match        https://www.youtube.com
 // @match        https://www.youtube.com/*
@@ -9,14 +9,8 @@
 (function (){
     "use strict";
 
-    const REDIRECT_URL = URL_LIST.STUDY_KONO;
+    const REDIRECT_URL = "https://www.youtube.com/watch?v=wBf47hGMch0";
     let lastUrl = location.href;
-
-    const URL_LIST = {
-        YT_HOME: "https://www.youtube.com",
-        STUDY_KONO: "https://www.youtube.com/watch?v=wBf47hGMch0",
-        GOOGLE_HOME: "https://www.google.com",
-    }
 
     doAll();
 
