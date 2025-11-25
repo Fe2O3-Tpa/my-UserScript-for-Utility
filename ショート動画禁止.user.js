@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         特定の条件を満たす動画を禁止
+// @name         YouTubeショート動画を禁止
 // @version      1.2.1
-// @description  Youtubeのショート動画を禁止する。
+// @description  YouTubeのショート動画を禁止する。
 // @match        https://www.youtube.com
 // @match        https://www.youtube.com/*
 // ==/UserScript==
